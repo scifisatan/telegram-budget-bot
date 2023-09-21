@@ -18,7 +18,7 @@ app.post(`/bot${token}`, async (req: Request, res: Response) => {
     res.send('Hello Bot!')
 })
 
-app.listen(8080, async () => {
+app.listen(process.env.PORT||3001, async () => {
     await bot.setWebHook(`${url}/bot${token}`);
     console.log("bot is listening")
 })
