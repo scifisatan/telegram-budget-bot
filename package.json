@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "start": "npx nodemon main.ts"
+    "start": "npx nodemon main.ts --ignore ./budgetDB.json"
   },
   "engines": {
     "node": ">=14"
@@ -20,6 +20,7 @@
     "node-json-db": "^2.2.0",
     "node-telegram-bot-api": "^0.63.0",
     "nodemon": "^3.0.1",
+    "tablemark": "^3.0.0",
     "ts-node": "^10.9.1"
   }
 }

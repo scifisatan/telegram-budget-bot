@@ -1,6 +1,7 @@
 import TelegramBot, { SendMessageOptions } from "node-telegram-bot-api";
 import * as budget from "./budget";
 import dotenv from 'dotenv'
+import tablemark from "tablemark"
 dotenv.config()
 
 const opts: SendMessageOptions = {
@@ -32,11 +33,11 @@ const opts: SendMessageOptions = {
 
 const options = {
     webHook: {
-        port:8080
+        port: 8080
     }
 };
 
-const token : string = (process.env.TOKEN as string);
+const token: string = (process.env.TOKEN as string);
 
 export const bot: TelegramBot = new TelegramBot(token, options)
 
@@ -153,8 +154,21 @@ bot.onText(/Show Transaction/, async (msg) => {
         }
         else {
             let transactions = await budget.showTransaction(username);
-            let message = transactions;
-            await bot.sendMessage(msg.chat.id, JSON.stringify(message));
+            let jsonData = transactions;
+            let tableData: any = [];
+            for (const date in jsonData) {
+                const { amount, type, description } = jsonData[date];
+                tableData.push([type, amount, description]);
+            }
+
+            const markdownTable = tablemark(tableData, {
+                columns: [
+                    "Type",
+                    "Amount",
+                    "Note"
+                ]
+            });
+            await bot.sendMessage(msg.chat.id, markdownTable, opts);
         }
     }
     catch {
