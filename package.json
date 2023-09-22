@@ -7,7 +7,7 @@
     "start": "npx nodemon main.ts --ignore ./budgetDB.json"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "author": "",
   "license": "ISC",
