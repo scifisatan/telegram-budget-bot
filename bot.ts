@@ -153,13 +153,15 @@ bot.onText(/Show Transaction/, async (msg) => {
         }
         else {
             let transactions = await budget.showTransaction(username);
-            let jsonData = transactions;
-            let markdownTable = `| Type | Amount | Note |\n| ---- | ------ | ---- |\n`;
-            for (let key in jsonData) {
-                markdownTable += `| ${jsonData[key].type} | ${jsonData[key].amount} | ${jsonData[key].description} |\n`;
-            }
-
-            await bot.sendMessage(msg.chat.id, `\`${markdownTable}\``, opts);
+            await transactions.then((jsonData) => {
+                for (let key in jsonData) {
+                    let markdownTable = `| Type | Amount | Note |\n| ---- | ------ | ---- |\n`;
+                    markdownTable += `| ${jsonData[key].type} | ${jsonData[key].amount} | ${jsonData[key].description} |\n`;
+                }
+            }).then((markdownTable) => {
+                ;
+                bot.sendMessage(msg.chat.id, `\`${markdownTable}\``, opts);
+            });
         }
     }
     catch (e) {
