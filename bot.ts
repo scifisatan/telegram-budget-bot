@@ -158,7 +158,7 @@ bot.onText(/Show Transaction/, async (msg) => {
             for (let key in jsonData) {
                 markdownTable += `| ${jsonData[key].type} | ${jsonData[key].amount} | ${jsonData[key].description} |\n`;
             }
-            
+
             await bot.sendMessage(msg.chat.id, `\`${markdownTable}\``, opts);
         }
     }

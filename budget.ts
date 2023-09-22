@@ -1,4 +1,4 @@
-interface transactions{
+interface transactions {
     amount: number;
     type: "income" | "expense";
     description: string;
@@ -11,14 +11,14 @@ interface User {
 }
 // type Usernames = Record<string, User>
 
-import { JsonDB, Config } from 'node-json-db'; 
+import { JsonDB, Config } from 'node-json-db';
 
 const database = new JsonDB(new Config("budgetDB", true, true, '/'));
 
 export const createUser = async (username: string) => {
     try {
         await database.push(`/${username}`, { balance: 0, transaction: {} });
-       
+
         console.log("User created");
     }
     catch (error) {
@@ -32,7 +32,7 @@ export const checkUser = async (username: string) => {
         return true;
     } catch (error) {
         return false;
-    } 
+    }
 }
 
 export const addIncome = async (username: string, income: number, description: string) => {
@@ -43,7 +43,7 @@ export const addIncome = async (username: string, income: number, description: s
         description: description
     }
     const balance: number = await database.getData(`/${username}/balance`);
-    await database.push(`/${username}/balance`, balance+income);
+    await database.push(`/${username}/balance`, balance + income);
     await database.push(`/${username}/transactions/${date}`, transaction);
 }
 
@@ -56,7 +56,7 @@ export const addExpense = async (username: string, expense: number, description:
         description: description
     }
     const balance: number = await database.getData(`/${username}/balance`);
-    await database.push(`/${username}/balance`, balance-expense);
+    await database.push(`/${username}/balance`, balance - expense);
     await database.push(`/${username}/transactions/${date}}`, transaction);
 }
 
@@ -69,7 +69,3 @@ export const showBalance = async (username: string) => {
     const balance: number = await database.getData(`/${username}/balance`);
     return balance;
 }
-
-
-
-
