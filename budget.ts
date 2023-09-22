@@ -61,7 +61,7 @@ export const addExpense = async (username: string, expense: number, description:
 }
 
 export const showTransaction = async (username: string) => {
-    const transaction:transactions = await database.getData(`/${username}/transactions`);
+    const transaction = await database.getData(`/${username}/transactions`);
     return transaction;
 }
 

@@ -22,5 +22,8 @@
     "nodemon": "^3.0.1",
     "tablemark": "^3.0.0",
     "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.3"
   }
 }

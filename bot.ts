@@ -1,7 +1,6 @@
 import TelegramBot, { SendMessageOptions } from "node-telegram-bot-api";
 import * as budget from "./budget";
 import dotenv from 'dotenv'
-import tablemark from "tablemark"
 dotenv.config()
 
 const opts: SendMessageOptions = {
@@ -155,23 +154,16 @@ bot.onText(/Show Transaction/, async (msg) => {
         else {
             let transactions = await budget.showTransaction(username);
             let jsonData = transactions;
-            let tableData: any = [];
-            for (const date in jsonData) {
-                const { amount, type, description } = jsonData[date];
-                tableData.push([type, amount, description]);
+            let markdownTable = `| Type | Amount | Note |\n| ---- | ------ | ---- |\n`;
+            for (let key in jsonData) {
+                markdownTable += `| ${jsonData[key].type} | ${jsonData[key].amount} | ${jsonData[key].description} |\n`;
             }
-
-            const markdownTable = tablemark(tableData, {
-                columns: [
-                    "Type",
-                    "Amount",
-                    "Note"
-                ]
-            });
-            await bot.sendMessage(msg.chat.id, markdownTable, opts);
+            
+            await bot.sendMessage(msg.chat.id, `\`${markdownTable}\``, opts);
         }
     }
-    catch {
+    catch (e) {
+        console.log(e)
         await bot.sendMessage(msg.chat.id, "You have not entered any transaction yet");
     }
 });
