@@ -1,5 +1,5 @@
 import TelegramBot, { SendMessageOptions } from "node-telegram-bot-api";
-import * as budget from "./budget";
+import * as db from "./database";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -46,13 +46,13 @@ bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
     if (msg?.from?.username) {
         let username = msg?.from?.username;
-        if (await budget.checkUser(username)) {
+        if (await db.checkUser(username)) {
             await bot.sendMessage(chatId, `Welcome back @${username}`, opts);
             return;
         }
         else {
-            await budget.createUser(msg?.from?.username);
-            await bot.sendMessage(chatId, `Welcome to your budget tracker ${msg?.from?.username}`, opts);
+            await db.createUser(msg?.from?.username);
+            await bot.sendMessage(chatId, `Welcome to your db tracker ${msg?.from?.username}`, opts);
         }
     }
     else {
@@ -64,7 +64,7 @@ bot.onText(/Check My Balance/, async (msg) => {
     const chatId = msg.chat.id;
     try {
         if (msg?.from?.username) {
-            await bot.sendMessage(chatId, `Your balance is ${await budget.showBalance(msg?.from?.username)}`);
+            await bot.sendMessage(chatId, `Your balance is ${await db.showBalance(msg?.from?.username)}`);
         }
         else {
             await bot.sendMessage(chatId, `You should start with /start`);
@@ -101,7 +101,7 @@ bot.onText(/Add Expense/, async (msg) => {
             }
             let description = replyHandler.text.split(" ").splice(1).join(" ");
             let descriptionMsg = description == "" ? "Expense added with no note" : `Expense has been added with note \`${description}\``
-            await budget.addExpense(username, amount, description);
+            await db.addExpense(username, amount, description);
 
             await bot.sendMessage(replyHandler.chat.id, descriptionMsg, opts);
         }
@@ -136,7 +136,7 @@ bot.onText(/Add Income/, async (msg) => {
             }
             let description = replyHandler.text.split(" ").splice(1).join(" ");
             let descriptionMsg = description == "" ? "Income added with no note" : `Income has been added with note \`${description}\``
-            await budget.addIncome(username, amount, description);
+            await db.addIncome(username, amount, description);
 
             await bot.sendMessage(replyHandler.chat.id, descriptionMsg, opts);
         }
@@ -152,16 +152,13 @@ bot.onText(/Show Transaction/, async (msg) => {
             await bot.sendMessage(msg.chat.id, "You should start with /start");
         }
         else {
-            let transactions = await budget.showTransaction(username);
-            await transactions.then((jsonData) => {
-                for (let key in jsonData) {
-                    let markdownTable = `| Type | Amount | Note |\n| ---- | ------ | ---- |\n`;
-                    markdownTable += `| ${jsonData[key].type} | ${jsonData[key].amount} | ${jsonData[key].description} |\n`;
-                }
-            }).then((markdownTable) => {
-                ;
-                bot.sendMessage(msg.chat.id, `\`${markdownTable}\``, opts);
-            });
+            let transactions = await db.showTransaction(username);
+            
+            let markdownTable = `| Type | Amount | Note |\n| ---- | ------ | ---- |\n`;
+            for (let transaction of transactions) {
+                markdownTable += `| ${transaction.type} | ${transaction.amount} | ${transaction.description} |\n`;
+            }
+            await bot.sendMessage(msg.chat.id, `\`${markdownTable}\``, opts);
         }
     }
     catch (e) {

@@ -1,23 +1,10 @@
-interface transactions {
-    amount: number;
-    type: "income" | "expense";
-    description: string;
-}
-type Transaction = Record<string, transactions>
-
-interface User {
-    balance: number;
-    transaction: Transaction;
-}
-// type Usernames = Record<string, User>
 
 import { JsonDB, Config } from 'node-json-db';
-
 const database = new JsonDB(new Config("budgetDB", true, true, '/'));
 
 export const createUser = async (username: string) => {
     try {
-        await database.push(`/${username}`, { balance: 0, transaction: {} });
+        await database.push(`/${username}`, { balance: 0, transactions: {} });
 
         console.log("User created");
     }

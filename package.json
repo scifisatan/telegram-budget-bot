@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "start": "npx nodemon main.ts --ignore ./budgetDB.json"
+    "start": "npx prisma generate && npx nodemon main.ts"
   },
   "engines": {
     "node": ">=16"
@@ -13,17 +13,22 @@
   "license": "ISC",
   "dependencies": {
     "@ngrok/ngrok": "^0.6.0",
+    "@prisma/client": "^5.3.1",
     "@types/express": "^4.17.17",
     "@types/node-telegram-bot-api": "^0.61.7",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "mysql2": "^3.6.1",
     "node-json-db": "^2.2.0",
     "node-telegram-bot-api": "^0.63.0",
     "nodemon": "^3.0.1",
-    "tablemark": "^3.0.0",
-    "ts-node": "^10.9.1"
+    "tablemark": "^3.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.19.3"
+    "@types/node": "^20.6.3",
+    "esbuild": "^0.19.3",
+    "prisma": "^5.3.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }
