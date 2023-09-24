@@ -14,7 +14,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.post(`/bot${token}`, async (req: Request, res: Response) => {
-    console.log("command has been enetered")
+    console.log("command has been entered")
     bot.processUpdate(req.body);
     res.send('Hello Bot!')
 })
