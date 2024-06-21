@@ -13,7 +13,7 @@ TOKEN = {TOKEN}
 Note: You can aslo use the file `budget.ts` if you can't run a database server by using local json file as your database. Modify the codebase accordingly.
 
 ## Usage
-To start interacting with both simply run this command
+To start interacting with the bot simply run this command after setup
 ```javascript
 npm install && npm run start
 ```
