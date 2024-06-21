@@ -3,7 +3,7 @@
 
 # Telegram Budget Tracker
 Rather than having a separate budget tracking app, I made a budget tracker that can be controlled through telegram, a messaging platform I use on a daily basis.
-Having a budget tracker inside my messaging app allowed me to have less friction between me and my money management
+Having a budget tracker inside my messaging app allowed me to reduce friction between me and my money management
 
 ## Setup
 1. Clone this repository.
