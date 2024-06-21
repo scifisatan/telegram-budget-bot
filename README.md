@@ -24,8 +24,7 @@ Note: You can aslo use the file `budget.ts` if you can't run a database server b
 
 ## Usage
 To start interacting with the bot simply run this command after setup
-```javascript![Uploading Screenshot 2024-06-21 191140.png…]()
-
+```javascript
 npm install && npm run start
 ```
 ## Future Improvements:
