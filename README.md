@@ -1,4 +1,5 @@
-## Live Preview: https://t.me/coolbudgetbot |Don't have a database so data doesn't persist rn :( |
+## Live Preview: https://t.me/coolbudgetbot 
+#### Don't have a database so data doesn't persist rn :( 
 
 # Telegram Budget Tracker
 Rather than having a separate budget tracking app, I made a budget tracker that can be controlled through telegram, a messaging platform I use on a daily basis.
