@@ -6,8 +6,9 @@ Rather than having a separate budget tracking app, I made a budget tracker that 
 Having a budget tracker inside my messaging app allowed me to reduce friction between me and my money management
 
 ## Screenshots
-![Screenshot 2024-06-21 191140](https://github.com/scifisatan/telegram-budget-bot/assets/60970080/9c35ff40-292c-41b9-b2c2-f0167ddb6ea5)
-![Screenshot 2024-06-21 191233](https://github.com/scifisatan/telegram-budget-bot/assets/60970080/47f7cdd4-b89f-47f2-bc52-a721a3ec2fcb)
+|                       |                   |
+| :-------------------------: | :------------------------: |
+|  ![Screenshot 2024-06-21 191140](https://github.com/scifisatan/telegram-budget-bot/assets/60970080/9c35ff40-292c-41b9-b2c2-f0167ddb6ea5) | ![Screenshot 2024-06-21 191233](https://github.com/scifisatan/telegram-budget-bot/assets/60970080/47f7cdd4-b89f-47f2-bc52-a721a3ec2fcb) |
 
 
 ## Setup
